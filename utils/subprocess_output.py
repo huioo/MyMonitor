@@ -38,7 +38,7 @@ def get_subprocess_output(command, log, raise_on_empty_output=True):
     if not output and raise_on_empty_output:
         raise SubprocessOutputEmptyError("get_subprocess_output expected output but had none.")
 
-    return (output, err, proc.returncode)
+    return output, err, proc.returncode
 
 
 def log_subprocess(func):
@@ -54,6 +54,7 @@ def log_subprocess(func):
         log.debug("%s called" % fc)
         return func(*params, **kwargs)
     return wrapper
+
 
 subprocess.Popen = log_subprocess(subprocess.Popen)
 

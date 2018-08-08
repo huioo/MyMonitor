@@ -1,0 +1,605 @@
+SELECT
+    count(DISTINCT phone) AS post_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29') THEN
+                phone
+            END
+        )
+    ) AS upstream_policy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9')
+            AND custom LIKE %s THEN
+                phone
+            END
+        )
+    ) AS questionnaire_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12') THEN
+                phone
+            END
+        )
+    ) AS downstream_policy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_valid_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '9')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_valid_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` LIKE '%%TK%%'
+            AND age BETWEEN '22'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_tk_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` LIKE '%%TK%%'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_tk_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` LIKE '%%PA%%'
+            AND `code` <> 'PABJ'
+            AND `code` <> 'PACY'
+            AND `code` <> 'PASQ'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_pa_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` LIKE '%%PA%%'
+            AND `code` <> 'PABJ'
+            AND `code` <> 'PACY'
+            AND `code` <> 'PASQ'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_pa_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('PABJ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_pabj_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PABJ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_pabj_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('PACY')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_pacy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PACY')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_pacy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('PASQ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_pasq_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PASQ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_pasq_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('DDH5' , 'DDH10')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_ddh_zq_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH5' , 'DDH10')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_ddh_zq_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('DDH4')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_ddh_xd_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH4')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_ddh_xd_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('DDH8')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_ddh_cs_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH8')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_ddh_cs_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('HZZ', 'HZD')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_hz_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HZZ', 'HZD')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_hz_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('ZYNG2')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_zy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZYNG2')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_zy_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('TPZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_tp_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('TPZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_tp_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('ZGZXT1','ZGZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_zg_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZGZXT1','ZGZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_zg_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('HXZ1,HXZ3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_hx_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HXZ1,HXZ3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_hx_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('HXKS1' , 'HXKS3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_hx_ks_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HXKS1' , 'HXKS3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_hx_ks_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('ZYKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_zy_ks_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZYKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_zy_ks_count,
+    COUNT(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('TPKS1')
+            AND age BETWEEN '25' AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_tp_ks_count,
+    COUNT(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0' , '12')
+            AND `code` IN ('TPKS1')
+            AND age BETWEEN '25' AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_tp_ks_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0', '12', '8', '9', '29')
+                    AND `code` IN ('ZSBJ1')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS upstream_zsbj_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0' , '12')
+                    AND `code` IN ('ZSBJ1')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS downstream_zsbj_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0', '12', '8', '9', '29')
+                    AND `code` IN ('ZSZ')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS upstream_zsxn_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0' , '12')
+                    AND `code` IN ('ZSZ')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS downstream_zsxn_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0', '12', '8', '9', '29')
+                    AND `code` IN ('BNZZ1')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS upstream_bn_count,
+    COUNT(DISTINCT (CASE
+            WHEN
+                `status` IN ('0' , '12')
+                    AND `code` IN ('BNZZ1')
+                    AND age BETWEEN '25' AND '47'
+            THEN
+                phone
+        END)) AS downstream_bn_count,
+
+    COUNT(DISTINCT (CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` IN ('BDKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+        END)) AS upstream_bd_count,
+    COUNT(DISTINCT (CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('BDKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+        END)) AS downstream_bd_count,
+
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '29')
+            AND `code` NOT IN (
+            'BDKS1',
+            'BNZZ1',
+            'DDH10',
+            'DDH4',
+            'DDH5',
+            'DDH8',
+            'HXKS1',
+            'HXKS3',
+            'HXZ3',
+            'HZD',
+            'HZZ',
+            'KSZ1',
+            'LPB',
+            'PABJ',
+            'PAC',
+            'PACB',
+            'PACC',
+            'PACY',
+            'PAD',
+            'PASQ',
+            'PAT',
+            'PAY',
+            'PAYT',
+            'PAZ',
+            'TKCFZ',
+            'TKCFZ2',
+            'TKCFZ3',
+            'TKCFZ4',
+            'TKCFZ5',
+            'TKCFZ6',
+            'TKCFZ7',
+            'TKCFZ8',
+            'TKFZ',
+            'TKFZ2',
+            'TKFZ3',
+            'TKFZ5',
+            'TKHFZ',
+            'TKHZ',
+            'TKKSCB1',
+            'TKSXK',
+            'TKSXK2',
+            'TKSXK3',
+            'TKZ',
+            'TKZ3',
+            'TKZ4',
+            'TKZ5',
+            'TPKS1',
+            'TPZ',
+            'ZGZ1',
+            'ZGZXT1',
+            'ZSBJ1',
+            'ZSZ',
+            'ZYKS1',
+            'ZYNG2'
+            )
+            AND age BETWEEN '22'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS upstream_other_count,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` NOT IN (
+            'BDKS1',
+            'BNZZ1',
+            'DDH10',
+            'DDH4',
+            'DDH5',
+            'DDH8',
+            'HXKS1',
+            'HXKS3',
+            'HXZ3',
+            'HZD',
+            'HZZ',
+            'KSZ1',
+            'LPB',
+            'PABJ',
+            'PAC',
+            'PACB',
+            'PACC',
+            'PACY',
+            'PAD',
+            'PASQ',
+            'PAT',
+            'PAY',
+            'PAYT',
+            'PAZ',
+            'TKCFZ',
+            'TKCFZ2',
+            'TKCFZ3',
+            'TKCFZ4',
+            'TKCFZ5',
+            'TKCFZ6',
+            'TKCFZ7',
+            'TKCFZ8',
+            'TKFZ',
+            'TKFZ2',
+            'TKFZ3',
+            'TKFZ5',
+            'TKHFZ',
+            'TKHZ',
+            'TKKSCB1',
+            'TKSXK',
+            'TKSXK2',
+            'TKSXK3',
+            'TKZ',
+            'TKZ3',
+            'TKZ4',
+            'TKZ5',
+            'TPKS1',
+            'TPZ',
+            'ZGZ1',
+            'ZGZXT1',
+            'ZSBJ1',
+            'ZSZ',
+            'ZYKS1',
+            'ZYNG2'
+            )
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS downstream_other_count
+FROM
+    t_req_{channel} a
+LEFT JOIN t_user b ON a.user_id = b.id
+WHERE
+    req_time >= %s and req_time < %s
+and subchannel = %s

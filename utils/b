@@ -1,0 +1,584 @@
+SELECT
+    date(req_time) AS 时间,
+    '189mail1' AS 渠道,
+    subchannel AS 子渠道,
+    count(DISTINCT phone) AS 信息提交数,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29') THEN
+                phone
+            END
+        )
+    ) AS 赠险数,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 有效数,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` LIKE '%TK%'
+            AND `code` <> 'TKZ3'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 泰康收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` <> 'TKZ3'
+            AND `code` LIKE '%TK%'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 泰康成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` LIKE '%PA%'
+            AND `code` <> 'PABJ'
+            AND `code` <> 'PACY'
+            AND `code` <> 'PASQ'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 平安收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` LIKE '%PA%'
+            AND `code` <> 'PABJ'
+            AND `code` <> 'PACY'
+            AND `code` <> 'PASQ'
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 平安成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('PABJ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 必嘉收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PABJ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 必嘉成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('PACY')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 车盈收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PACY')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 车盈成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('PASQ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 三乾收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('PASQ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 三乾成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('DDH5', 'DDH10')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会直签收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH5', 'DDH10')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会直签成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('DDH4')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会新旦收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH4')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会新旦成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('DDH8')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会创思收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('DDH8')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 大都会创思成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('HZZ', 'HZD')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 上游合众数,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HZZ', 'HZD')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 下游合众数,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('ZYNG2')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 幸运保中英收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZYNG2')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 中英成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('TPZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 太平收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('TPZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 太平成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('ZGZXT1', 'ZGZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 国寿收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZGZXT1', 'ZGZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 国寿成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('HXZ1,HXZ3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 华夏收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HXZ1,HXZ3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 华夏成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('HXKS1', 'HXKS3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 华夏凯森收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('HXKS1', 'HXKS3')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 华夏凯森成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('ZYKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 中英凯森收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZYKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 中英凯森成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('TPKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 太平凯森收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('TPKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 太平凯森成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('ZSZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 招商收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('ZSZ')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 招商成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('BNZZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 百年收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('BNZZ1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 百年成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` IN ('BDKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 北大收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` IN ('BDKS1')
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 北大成本,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12', '8', '9', '26', '29')
+            AND `code` NOT IN (
+                'BDKS1',
+                'BNZZ1',
+                'DDH10',
+                'DDH4',
+                'DDH5',
+                'DDH8',
+                'HXKS1',
+                'HXKS3',
+                'HXZ3',
+                'HZD',
+                'HZZ',
+                'KSZ1',
+                'LPB',
+                'PABJ',
+                'PAC',
+                'PACB',
+                'PACC',
+                'PACY',
+                'PAD',
+                'PASQ',
+                'PAT',
+                'PAY',
+                'PAYT',
+                'PAZ',
+                'TKCFZ',
+                'TKCFZ2',
+                'TKCFZ3',
+                'TKCFZ4',
+                'TKCFZ5',
+                'TKCFZ6',
+                'TKCFZ7',
+                'TKCFZ8',
+                'TKFZ',
+                'TKFZ2',
+                'TKFZ3',
+                'TKFZ5',
+                'TKHFZ',
+                'TKHZ',
+                'TKKSCB1',
+                'TKSXK',
+                'TKSXK2',
+                'TKSXK3',
+                'TKZ',
+                'TKZ3',
+                'TKZ4',
+                'TKZ5',
+                'TPKS1',
+                'TPZ',
+                'ZGZ1',
+                'ZGZXT1',
+                'ZSBJ1',
+                'ZSZ',
+                'ZYKS1',
+                'ZYNG2'
+            )
+            AND age BETWEEN '22'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 其他收入,
+    count(
+        DISTINCT (
+            CASE
+            WHEN `status` IN ('0', '12')
+            AND `code` NOT IN (
+                'BDKS1',
+                'BNZZ1',
+                'DDH10',
+                'DDH4',
+                'DDH5',
+                'DDH8',
+                'HXKS1',
+                'HXKS3',
+                'HXZ3',
+                'HZD',
+                'HZZ',
+                'KSZ1',
+                'LPB',
+                'PABJ',
+                'PAC',
+                'PACB',
+                'PACC',
+                'PACY',
+                'PAD',
+                'PASQ',
+                'PAT',
+                'PAY',
+                'PAYT',
+                'PAZ',
+                'TKCFZ',
+                'TKCFZ2',
+                'TKCFZ3',
+                'TKCFZ4',
+                'TKCFZ5',
+                'TKCFZ6',
+                'TKCFZ7',
+                'TKCFZ8',
+                'TKFZ',
+                'TKFZ2',
+                'TKFZ3',
+                'TKFZ5',
+                'TKHFZ',
+                'TKHZ',
+                'TKKSCB1',
+                'TKSXK',
+                'TKSXK2',
+                'TKSXK3',
+                'TKZ',
+                'TKZ3',
+                'TKZ4',
+                'TKZ5',
+                'TPKS1',
+                'TPZ',
+                'ZGZ1',
+                'ZGZXT1',
+                'ZSBJ1',
+                'ZSZ',
+                'ZYKS1',
+                'ZYNG2'
+            )
+            AND age BETWEEN '25'
+            AND '47' THEN
+                phone
+            END
+        )
+    ) AS 其他成本
+FROM
+    t_req_189mail1 a
+LEFT JOIN t_user b ON a.user_id = b.id
